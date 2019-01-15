@@ -13,7 +13,7 @@ def mainPage():
     today = pd.to_datetime('today')
     yearEnd = '2019-12-31'
     us_bd = CustomBusinessDay(calendar=USFederalHolidayCalendar())
-    remainingBDays = pd.DatetimeIndex(start=today,end=yearEnd, freq=us_bd))
+    remainingBDays = pd.DatetimeIndex(start=today,end=yearEnd, freq=us_bd)
     hours_worked = None
     annual_target = None
     hours_per_day = None
