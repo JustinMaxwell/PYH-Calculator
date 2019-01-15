@@ -1,5 +1,4 @@
 <html lang="en">
-
 <head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132483534-1"></script>
@@ -20,7 +19,7 @@
 
   <script>
     window.console = window.console || function(t) {};
-</script>
+  </script>
 
 
 
@@ -28,21 +27,18 @@
     if (document.location.search.match(/type=embed/gi)) {
     window.parent.postMessage("resize", "*");
   }
-</script>
+  </script>
 
 
 </head>
-
 <body translate="no">
-
-
   <div class="container">
     <div class="row header">
       <h1>PYH Calculator &nbsp;</h1>
       <h3>A simple tool to help with budgeting productive year hours (PYH).</h3>
     </div>
     <div class="row body">
-      <form action="#">
+      <form method="POST" action="#">
         <ul>
 
           <li>
@@ -67,7 +63,11 @@
           </li>
           <li>
             <label for="results">results</label>
-            <textarea cols="46" rows="3" name="results">Value from my_list: {{my_list[3]}} &nbsp; Value from my_string: {{my_string}}</textarea>
+            <textarea cols="46" rows="4" name="results">
+               Hours Worked: {{hours_worked}}
+               Annual Target: {{annual_target}}
+               Hours Per Day: {{hours_per_day}}
+             </textarea>
           </li>
 
           <li>
@@ -80,16 +80,7 @@
     </div>
   </div>
 
-
-
-
-
-
   <script src="https://static.codepen.io/assets/editor/live/css_reload-5619dc0905a68b2e6298901de54f73cefe4e079f65a75406858d92924b4938bf.js"></script>
 
-
-
-
 </body>
-
 </html>
