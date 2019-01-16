@@ -7,10 +7,14 @@ body {
   font-weight: 400;
 }
 
-tr, th, td {
+table, th, td {
   margin: 0 0 0.5em 0;
   color: #7b609a;
   font-size: 1em;
+  text-align: left;
+  border-bottom: 1px  solid;
+  border-collapse: collapse;
+  padding: 6px 6px;
 }
 
 div, textarea, input {
