@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132483534-1"></script>
@@ -28,9 +29,8 @@
     window.parent.postMessage("resize", "*");
   }
   </script>
-
-
 </head>
+
 <body translate="no">
   <div class="container">
     <div class="row header">
@@ -64,10 +64,28 @@
           <li>
             <label for="results">results</label>
             <textarea cols="46" rows="4" name="results">
-               Hours Worked: {{hours_worked}}
-               Annual Target: {{annual_target}}
-               Hours Per Day: {{hours_per_day}}
+               Days Off: {{days_off}}
+               Holidays Remaining: {{holidays}}
+               Workable Days Remaining: {{workable_days}}
              </textarea>
+            <table style="width:100%">
+              <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Age</th>
+              </tr>
+              <tr>
+                <td>Jill</td>
+                <td>Smith</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>Eve</td>
+                <td>Jackson</td>
+                <td>94</td>
+              </tr>
+            </table>
+
           </li>
 
           <li>
@@ -83,4 +101,5 @@
   <script src="https://static.codepen.io/assets/editor/live/css_reload-5619dc0905a68b2e6298901de54f73cefe4e079f65a75406858d92924b4938bf.js"></script>
 
 </body>
+
 </html>

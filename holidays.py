@@ -9,5 +9,7 @@ from pandas.tseries.holiday import USFederalHolidayCalendar
 from pandas.tseries.offsets import CustomBusinessDay
 
 us_bd = CustomBusinessDay(calendar=USFederalHolidayCalendar())
-print(pd.DatetimeIndex(start=today,end='2019-12-31', freq=us_bd))
+weekdays = pd.DatetimeIndex(start=today,end='2019-12-31', freq=us_bd)
+print(weekdays.shape[0])
+
 
