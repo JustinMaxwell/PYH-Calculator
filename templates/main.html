@@ -11,7 +11,7 @@
     gtag('config', 'UA-132483534-1');
   </script>
   <meta charset="UTF-8">
-  <link rel="icon" href="https://www.eurekastrategic.com/wp-content/uploads/2017/10/favicon.png" type="image/x-icon">
+  <link rel="icon" href="static/favicon.png" type="image/x-icon">
   <title>PYH Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -21,8 +21,6 @@
   <script>
     window.console = window.console || function(t) {};
   </script>
-
-
 
   <script>
     if (document.location.search.match(/type=embed/gi)) {
@@ -44,18 +42,18 @@
           <li>
             <p class="left">
               <label for="hours_worked">PYH hours worked (YTD)</label>
-              <input type="number" name="hours_worked" placeholder={{hours_worked}}>
+              <input type="number" min="0" step=".01" name="hours_worked" placeholder={{hours_worked}}>
             </p>
             <p class="pull-right">
-              <label for="annual_target">annual target</label>
-              <input type="number" name="annual_target" placeholder={{annual_target}}>
+              <label for="annual_target">annual PYH minimum</label>
+              <input type="number" min="0 "name="annual_target" placeholder={{annual_target}}>
             </p>
           </li>
 
           <li>
             <p>
               <label for="hours_per_day">hours per day</label>
-              <input type="number" min="1" max="12" name="hours_per_day" placeholder={{hours_per_day}}>
+              <input type="number" min="1" max="12" step=".01" name="hours_per_day" placeholder={{hours_per_day}}>
             </p>
           </li>
           <li>
@@ -64,7 +62,7 @@
           <li>
             <table style="width:100%">
               <tr>
-                <th>days off</th>
+                <th>days off remaining</th>
                 <td>{{days_off}}</td>
               </tr>
               <tr>
@@ -88,8 +86,6 @@
       </form>
     </div>
   </div>
-
-  <script src="https://static.codepen.io/assets/editor/live/css_reload-5619dc0905a68b2e6298901de54f73cefe4e079f65a75406858d92924b4938bf.js"></script>
 
 </body>
 

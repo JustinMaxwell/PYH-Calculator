@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, make_response
 import pandas as pd
 from pandas.tseries.holiday import USFederalHolidayCalendar
 from pandas.tseries.offsets import CustomBusinessDay, YearEnd
+from decimal import Decimal
 
 app = Flask(__name__)
 
@@ -24,14 +25,14 @@ def mainPage():
     hours_per_day = request.form.get('hours_per_day') or request.cookies.get('hours_per_day')
     if request.method == 'POST' and hours_worked and annual_target and hours_per_day:
         try:
-            hours_worked = int(hours_worked)
+            hours_worked = float(hours_worked)
             annual_target = int(annual_target)
-            hours_per_day = int(hours_per_day)
+            hours_per_day = float(hours_per_day)
         except:
             return blankPage
         pyhLeft = annual_target - hours_worked
         daysLeft = pyhLeft / hours_per_day
-        days_off = remainingBDays - daysLeft
+        days_off = round(Decimal(remainingBDays - daysLeft), 2)
         resp = make_response(render_template('main.html', days_off=days_off,
              holidays=holidays, workable_days=workable_days, hours_worked=hours_worked,
              annual_target=annual_target, hours_per_day=hours_per_day))
