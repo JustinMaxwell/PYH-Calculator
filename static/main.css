@@ -81,7 +81,7 @@ h3 {
   border-bottom: 5px solid;
   text-transform: uppercase;
   background-color: #b3b3b3;
-  border-bottom-color: #8c8c8c;
+  border-bottom-color: #674e84;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
 }
@@ -92,7 +92,7 @@ h3 {
 
 .btn.btn-submit {
   background-color: #7b609a;
-  border-bottom-color: #8c71ab;
+  border-bottom-color: #5d4677;
 }
 
 .btn.btn-submit:hover {
@@ -171,6 +171,71 @@ form small {
   color: #7b609a;
   margin: 0 0 0 0.5em;
 }
+
+/* CSS for tooltips */
+
+.tool {
+    cursor: help;
+    position: relative;
+}
+
+
+/*== common styles for both parts of tool tip ==*/
+.tool::before,
+.tool::after {
+    left: 50%;
+    opacity: 0;
+    position: absolute;
+    z-index: -100;
+}
+
+.tool:hover::before,
+.tool:focus::before,
+.tool:hover::after,
+.tool:focus::after {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    z-index: 100;
+}
+
+
+/*== pointer tip ==*/
+.tool::before {
+    border-style: solid;
+    border-width: 1em 0.75em 0 0.75em;
+    border-color: #3E474F transparent transparent transparent;
+    bottom: 100%;
+    content: "";
+    margin-left: -0.5em;
+    transition: all .65s cubic-bezier(.84,-0.18,.31,1.26), opacity .65s .5s;
+    transform:  scale(.6) translateY(-90%);
+}
+
+.tool:hover::before,
+.tool:focus::before {
+    transition: all .65s cubic-bezier(.84,-0.18,.31,1.26) .2s;
+}
+
+
+/*== speech bubble ==*/
+.tool::after {
+    background: #3E474F;
+    border-radius: .25em;
+    bottom: 180%;
+    color: #EDEFF0;
+    content: attr(data-tip);
+    margin-left: -60px;
+    padding: 1em;
+    transition: all .65s cubic-bezier(.84,-0.18,.31,1.26) .2s;
+    transform:  scale(.6) translateY(50%);
+    width: 17.5em;
+}
+
+.tool:hover::after,
+.tool:focus::after  {
+    transition: all .65s cubic-bezier(.84,-0.18,.31,1.26);
+}
+
 
 @media only screen and (max-width: 480px) {
   .pull-right {

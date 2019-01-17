@@ -41,18 +41,22 @@
 
           <li>
             <p class="left">
-              <label for="hours_worked">PYH hours worked (YTD)</label>
+              <label for="hours_worked"><span class="tool" data-tip="This total should include all PYH hours worked, from the beggining of the calendar year until (but not including) today. The total should also include any used training hours."
+                  tabindex="1">hours worked
+              </label>
               <input type="number" min="0" step=".01" name="hours_worked" placeholder={{hours_worked}}>
             </p>
             <p class="pull-right">
-              <label for="annual_target">annual PYH minimum</label>
-              <input type="number" min="0 "name="annual_target" placeholder={{annual_target}}>
+              <label for="annual_target"><span class="tool" data-tip="Minimum number of PYH hours required to work per calendar year (e.g. 1790)." tabindex="1">annual minimum
+              </label>
+              <input type="number" min="0 " name="annual_target" placeholder={{annual_target}}>
             </p>
           </li>
 
           <li>
             <p>
-              <label for="hours_per_day">hours per day</label>
+              <label for="hours_per_day"><span class="tool" data-tip="The number of hours per day that you expect to work (e.g. 8, or 8.5)." tabindex="1">hours per day
+              </label>
               <input type="number" min="1" max="12" step=".01" name="hours_per_day" placeholder={{hours_per_day}}>
             </p>
           </li>
