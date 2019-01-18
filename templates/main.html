@@ -54,10 +54,15 @@
           </li>
 
           <li>
-            <p>
+            <p class="left">
               <label for="hours_per_day"><span class="tool" data-tip="The number of hours per day that you expect to work (e.g. 8, or 8.5)." tabindex="1">hours per day
               </label>
               <input type="number" min="1" max="12" step=".01" name="hours_per_day" placeholder={{hours_per_day}}>
+            </p>
+            <p class="pull-right" style="padding-right: 41px;">
+              <label for="hours_per_day"><span class="tool" data-tip="Check this box if you want to calculate values including hours worked today." tabindex="1">include today's hours
+              </label>
+              <input type="checkbox" name="include_today" value="include_today" style="width: auto;">
             </p>
           </li>
           <li>
