@@ -32,8 +32,8 @@ def mainPage():
         except:
             return blankPage
         pyhLeft = annual_target - hours_worked
-        daysLeft = (pyhLeft / hours_per_day) - int(bool(include_today))
-        days_off = round(Decimal(remainingBDays - daysLeft), 2)
+        daysLeft = (pyhLeft / hours_per_day)
+        days_off = round(Decimal(remainingBDays - daysLeft - int(bool(include_today))), 2)
         resp = make_response(render_template('main.html', days_off=days_off,
              holidays=holidays, workable_days=workable_days, hours_worked=hours_worked,
              annual_target=annual_target, hours_per_day=hours_per_day, checked=include_today))
