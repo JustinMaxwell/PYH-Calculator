@@ -35,7 +35,7 @@ def mainPage():
         daysLeft = (pyhLeft / hours_per_day)
         days_off = round(Decimal(remainingBDays - daysLeft - int(bool(include_today))), 2)
         resp = make_response(render_template('main.html', days_off=days_off,
-             holidays=holidays, workable_days=workable_days, hours_worked=hours_worked,
+             holidays=holidays, workable_days=(workable_days - int(bool(include_today))), hours_worked=hours_worked,
              annual_target=annual_target, hours_per_day=hours_per_day, checked=include_today))
         resp.set_cookie('hours_worked', str(hours_worked))
         resp.set_cookie('annual_target', str(annual_target))
