@@ -12,3 +12,6 @@ Typical process includes:
 7. `git commit -a -m 'message'`
 8. `git push origin master`
 9. set up pull request, or however it's done to my main repo.
+
+How to get this running on a digitalocean droplet:
+https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-applications
