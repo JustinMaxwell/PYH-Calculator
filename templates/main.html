@@ -44,12 +44,12 @@
               <label for="hours_worked"><span class="tool" data-tip="This total should include all PYH hours worked, from the beggining of the calendar year until (but not including) today. The total should also include any used training hours."
                   tabindex="1">hours worked
               </label>
-              <input type="number" min="0" max="2080" step=".01" name="hours_worked" placeholder={{hours_worked}}>
+              <input type="number" min="0" max="2080" step=".01" name="hours_worked" value={{hours_worked}}>
             </p>
             <p class="pull-right">
               <label for="annual_target"><span class="tool" data-tip="Minimum number of PYH hours required to work per calendar year (e.g. 1790)." tabindex="1">annual minimum
               </label>
-              <input type="number" min="0" max="2080" name="annual_target" placeholder={{annual_target}}>
+              <input type="number" min="0" max="2080" name="annual_target" value={{annual_target}}>
             </p>
           </li>
 
@@ -57,7 +57,7 @@
             <p class="left">
               <label for="hours_per_day"><span class="tool" data-tip="The number of hours per day that you expect to work (e.g. 8, or 8.5)." tabindex="1">hours per day
               </label>
-              <input type="number" min="1" max="14" step=".01" name="hours_per_day" placeholder={{hours_per_day}}>
+              <input type="number" min="1" max="14" step=".01" name="hours_per_day" value={{hours_per_day}}>
             </p>
             <p class="pull-right" style="padding-right: 41px;">
               <label for="hours_per_day"><span class="tool" data-tip="Check this box if you want to calculate values including hours worked today." tabindex="1">include today's hours
