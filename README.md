@@ -23,7 +23,7 @@ git push code to the pythonanywhere remote repo
 1. `git push origin master`
 
 ## Update production app
-1. from pythonanywhere.com console run `git pull`
+1. from pythonanywhere.com console run `git pull origin master`
 
 ## Tag and add release to master branch
 1. If that worked created a tag/release and push it to origin.
