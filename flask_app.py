@@ -1,6 +1,3 @@
-
-# A very simple Flask Hello World app for you to get started with...
-
 from flask import Flask, render_template, request, make_response
 import pandas as pd
 from pandas.tseries.holiday import USFederalHolidayCalendar
