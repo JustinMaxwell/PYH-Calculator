@@ -27,7 +27,7 @@
     window.parent.postMessage("resize", "*");
   }
   </script>
-  <!-- PYH Calc Version 2.0 -->
+  <!-- PYH Calc Version 1.8 -->
 </head>
 
 <body translate="no">
@@ -72,12 +72,8 @@
           <li>
             <table style="width:100%">
               <tr>
-                <th>days off remaining</th>
+                <th><span class="tool" data-tip="this amount does not include the additional days off for federal holidays." tabindex="1"></span>days off remaining</th>
                 <td>{{days_off}}</td>
-              </tr>
-              <tr>
-                <th>federal holidays remaining</th>
-                <td>{{holidays}}</td>
               </tr>
               <tr>
                 <th>workable days remaining</th>

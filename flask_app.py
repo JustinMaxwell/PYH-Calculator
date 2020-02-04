@@ -8,7 +8,7 @@ import requests
 app = Flask(__name__)
 
 today = pd.to_datetime('today')
-todays_date = str(today).split(' ')[0]
+todays_date = str(today).split(' ')[0][5:]
 yearBegin = today-YearBegin()
 yearEnd = today+YearEnd()
 us_bd = CustomBusinessDay(calendar=USFederalHolidayCalendar())
@@ -16,6 +16,7 @@ holidays = USFederalHolidayCalendar().holidays(start=today, end=yearEnd, return_
 holidayDates = holidays.index
 workable_days_total = Decimal(len(pd.DatetimeIndex(start=yearBegin,end=yearEnd, freq=us_bd)))
 worked_days_todate = Decimal(len(pd.DatetimeIndex(start=yearBegin,end=today, freq=us_bd)))
+progress = round((worked_days_todate/workable_days_total) * 100, 0)
 workable_days_remaining = Decimal(len(pd.DatetimeIndex(start=today,end=yearEnd, freq=us_bd)))
 days_off = ''
 
@@ -25,7 +26,7 @@ def mainPage():
     annual_minimum = request.form.get('annual_minimum') or request.cookies.get('annual_minimum') or 1790
     hours_per_day = request.form.get('hours_per_day') or request.cookies.get('hours_per_day') or 8
     include_today = request.form.get('include_today')
-    blankPage = render_template('main.html', days_off='', holidays='', workable_days='', include_today=None, annual_minimum=annual_minimum, hours_per_day=hours_per_day)
+    blankPage = render_template('main.html', days_off='', workable_days='', pyh_score='', today=f"{todays_date} ({progress}%)", include_today=None, annual_minimum=annual_minimum, hours_per_day=hours_per_day)
     if request.method == 'POST' and hours_worked and annual_minimum and hours_per_day:
         try:
             # unanet_time = get_report(user, passwd)
@@ -49,8 +50,9 @@ def mainPage():
         leave_score = round((days_off_remaining_percent - workable_days_percent) * 100, 2)
         pyh_score = round((hours_worked_percent - worked_days_percent) * 100, 2)
         resp = make_response(render_template('main.html', 
-            days_off=f"{days_off_remaining} of {days_off_total}", pyh_score=f"{leave_score} / {pyh_score}", today=todays_date,
-            holidays=len(holidays), workable_days=f"{workable_days} of {workable_days_total}", hours_worked=hours_worked, 
+            days_off=f"{days_off_remaining}", pyh_score=f"{leave_score} / {pyh_score}", 
+            today=f"{todays_date} ({progress}%)",
+            workable_days=f"{workable_days}", hours_worked=hours_worked, 
             annual_minimum=annual_minimum, hours_per_day=hours_per_day, include_today=checked))
         resp.set_cookie('hours_worked', str(hours_worked))
         resp.set_cookie('annual_minimum', str(annual_minimum))
