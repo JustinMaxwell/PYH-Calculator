@@ -3,7 +3,6 @@ import pandas as pd
 from pandas.tseries.holiday import USFederalHolidayCalendar
 from pandas.tseries.offsets import CustomBusinessDay, YearEnd, YearBegin
 from decimal import Decimal
-import requests
 
 app = Flask(__name__)
 
@@ -61,6 +60,7 @@ def mainPage():
     return blankPage
 
 def get_report(login,passwd):
+    import requests
     from bs4 import BeautifulSoup
     import base64
 
