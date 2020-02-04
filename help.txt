@@ -1,5 +1,0 @@
-git pull origin master
-# From the virtualenv directory (the one with the bin/, and include/ directory):
-bin/activate
-# Then install requirements
-pip3 install -r requirements.txt
