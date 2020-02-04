@@ -3,6 +3,7 @@ import pandas as pd
 from pandas.tseries.holiday import USFederalHolidayCalendar
 from pandas.tseries.offsets import CustomBusinessDay, YearEnd, YearBegin
 from decimal import Decimal
+import requests
 
 app = Flask(__name__)
 
@@ -27,6 +28,7 @@ def mainPage():
     blankPage = render_template('main.html', days_off='', holidays='', workable_days='', include_today=None, annual_minimum=annual_minimum, hours_per_day=hours_per_day)
     if request.method == 'POST' and hours_worked and annual_minimum and hours_per_day:
         try:
+            # unanet_time = get_report(user, passwd)
             hours_worked = Decimal(hours_worked)
             annual_minimum = Decimal(annual_minimum)
             hours_per_day = Decimal(hours_per_day)
@@ -55,6 +57,45 @@ def mainPage():
         resp.set_cookie('hours_per_day', str(hours_per_day))
         return resp
     return blankPage
+
+def get_report(login,passwd):
+    from bs4 import BeautifulSoup
+    import base64
+
+    def b64(text):
+        return base64.b64encode(text.encode()).decode()
+
+    login_url = "https://eurekastrategic.unanet.biz/eurekastrategic/action/login/validate"
+    path_info = b64("/eurekastrategic/action/reports/user/summary/time/report")
+    query_string = b64(f"loadValues=true&targetPath=/reports/user/summary/time/report&managerPath=/reports/user/summary/time/search&criteriaClass=com.unanet.page.reports.search.UserTimeSummarySearch$UserTimeSummaryCriteria&project_mod=false&projectClass=com.unanet.page.criteria.UserProjectComboMenu&dateRange=c_yr&adjustment=ENTERED&pendingAdjustment=true") 
+
+    data = {'username': login,
+    'password': passwd,
+    'button_ok': True,
+    'pathInfo': path_info,
+    "queryString": query_string}
+
+    session = requests.Session()
+    resp = session.post(login_url, data=data)
+
+    # HTML Response to dictionary of results
+    soup = BeautifulSoup(resp.text, 'html.parser')
+    tds = [row.findAll('td') for row in soup.table.findAll('tr')]
+    headers = tds[0]
+    results  = {"data":[]}
+    for td in tds[1:]:
+        if len(td) == 3:
+            results['data'].append({headers[0].string:td[0].string, headers[1].string:td[1].string, headers[2].string:td[2].string})
+        elif len(td) == 2:
+            results[td[0].string] = td[1].string
+        else:
+            raise Exception("Unexpected results")
+
+    pyh_hours = 0
+    for entry in results['data']: 
+        if entry['Project'] != 'TIME_OFF': 
+            pyh_hours += float(entry['Hours'])
+    return pyh_hours
 
 if __name__ == '__main__':
     app.run(debug=True)
