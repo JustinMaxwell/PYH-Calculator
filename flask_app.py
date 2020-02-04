@@ -35,15 +35,19 @@ def mainPage():
         except:
             return blankPage
         days_off_total = round(((workable_days_total * 8) - annual_minimum) / 8, 2)
-        pyhLeft = annual_minimum - hours_worked
-        daysLeft = (pyhLeft / hours_per_day)
+        hours_left = annual_minimum - hours_worked
+        days_left = (hours_left / hours_per_day)
+        hours_worked_percent = hours_worked/annual_minimum
         workable_days = workable_days_remaining - Decimal(include_today)
+        workable_days_percent = workable_days/workable_days_total
         worked_days = worked_days_todate - Decimal(not include_today)
-        days_off = round(workable_days - daysLeft, 2)
-        leave_score = round(((days_off/days_off_total) - ((workable_days)/workable_days_total)) * 100, 2)
-        pyh_score = round(((hours_worked/annual_minimum) - ((worked_days + include_today)/workable_days_total)) * 100, 2)
+        worked_days_percent = worked_days/workable_days_total
+        days_off_remaining = round(workable_days - days_left, 2)
+        days_off_remaining_percent = (days_off_remaining/days_off_total)
+        leave_score = round((days_off_remaining_percent - workable_days_percent) * 100, 2)
+        pyh_score = round((hours_worked_percent - worked_days_percent) * 100, 2)
         resp = make_response(render_template('main.html', 
-            days_off=f"{days_off} of {days_off_total}", pyh_score=f"{leave_score} / {pyh_score}", today=todays_date,
+            days_off=f"{days_off_remaining} of {days_off_total}", pyh_score=f"{leave_score} / {pyh_score}", today=todays_date,
             holidays=len(holidays), workable_days=f"{workable_days} of {workable_days_total}", hours_worked=hours_worked, 
             annual_minimum=annual_minimum, hours_per_day=hours_per_day, include_today=checked))
         resp.set_cookie('hours_worked', str(hours_worked))
