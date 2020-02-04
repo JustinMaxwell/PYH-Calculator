@@ -27,13 +27,13 @@
     window.parent.postMessage("resize", "*");
   }
   </script>
-  <!-- PYH Calc Version 1.7 -->
+  <!-- PYH Calc Version 2.0 -->
 </head>
 
 <body translate="no">
   <div class="container">
     <div class="row header">
-      <h1>PYH Calculator &nbsp;</h1>
+      <h1>PYH Calculator &nbsp;</h1> <span class="pull-right small-text">{{today}}</span>
       <h3>A simple tool to help with budgeting productive year hours (PYH).</h3>
     </div>
     <div class="row body">
@@ -48,9 +48,9 @@
               <input type="number" min="0" max="2080" step=".01" name="hours_worked" value={{hours_worked}}>
             </p>
             <p class="pull-right">
-              <label for="annual_target"><span class="tool" data-tip="Minimum number of PYH hours required to work per calendar year (e.g. 1790)." tabindex="1">annual minimum
+              <label for="annual_minimum"><span class="tool" data-tip="Minimum number of PYH hours required to work per calendar year (e.g. 1790)." tabindex="1">annual minimum
               </label>
-              <input type="number" min="0" max="2080" name="annual_target" value={{annual_target}}>
+              <input type="number" min="0" max="2080" name="annual_minimum" value={{annual_minimum}}>
             </p>
           </li>
 
@@ -61,9 +61,9 @@
               <input type="number" min="1" max="14" step=".01" name="hours_per_day" value={{hours_per_day}}>
             </p>
             <p class="pull-right" style="padding-right: 41px;">
-              <label for="hours_per_day"><span class="tool" data-tip="Check this box if you want to calculate values including hours worked today." tabindex="1">include today's hours
+              <label for="include_today"><span class="tool" data-tip="Check this box if you want to calculate values including hours worked today." tabindex="1">include today's hours
               </label>
-              <input type="checkbox" name="include_today" value="checked" style="width: auto;" {{checked}}>
+              <input type="checkbox" name="include_today" value="true" style="width: auto;" {{include_today}}>
             </p>
           </li>
           <li>
@@ -82,6 +82,10 @@
               <tr>
                 <th>workable days remaining</th>
                 <td>{{workable_days}}</td>
+              </tr>
+              <tr>
+                <th>pyh score</th>
+                <td>{{pyh_score}}</td>
               </tr>
             </table>
           </li>
