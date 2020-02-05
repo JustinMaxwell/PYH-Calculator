@@ -3,6 +3,7 @@
 .small-text {
   font-weight: 200;
   font-size: 80%;
+  white-space: nowrap;
 }
 
 body {
