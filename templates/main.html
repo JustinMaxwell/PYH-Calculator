@@ -5,11 +5,12 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132483534-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'UA-132483534-1');
   </script>
+  <script src="static/script.js"></script>
   <meta charset="UTF-8">
   <link rel="icon" href="static/favicon.png" type="image/x-icon">
   <title>PYH Calculator</title>
@@ -19,15 +20,15 @@
   <link rel="stylesheet" type="text/css" href="static/main.css" />
 
   <script>
-    window.console = window.console || function(t) {};
+    window.console = window.console || function (t) { };
   </script>
 
   <script>
     if (document.location.search.match(/type=embed/gi)) {
-    window.parent.postMessage("resize", "*");
-  }
+      window.parent.postMessage("resize", "*");
+    }
   </script>
-  <!-- PYH Calc Version 1.9 -->
+  <!-- PYH Calc Version 2.0 -->
 </head>
 
 <body translate="no">
@@ -39,16 +40,18 @@
     <div class="row body">
       <form method="POST" action=".">
         <ul>
-
           <li>
             <p class="left">
-              <label for="hours_worked"><span class="tool" data-tip="This total should include all PYH hours worked, from the beggining of the calendar year until (but not including) today. The total should also include any used training hours."
+              <label for="hours_worked"><span class="tool"
+                  data-tip="This total should include all PYH hours worked, from the beggining of the calendar year until (but not including) today. The total should also include any used training hours."
                   tabindex="1">hours worked
               </label>
               <input type="number" min="0" max="2080" step=".01" name="hours_worked" value={{hours_worked}}>
             </p>
             <p class="pull-right">
-              <label for="annual_minimum"><span class="tool" data-tip="Minimum number of PYH hours required to work per calendar year (e.g. 1790)." tabindex="1">annual minimum
+              <label for="annual_minimum"><span class="tool"
+                  data-tip="Minimum number of PYH hours required to work per calendar year (e.g. 1790)."
+                  tabindex="1">annual minimum
               </label>
               <input type="number" min="0" max="2080" name="annual_minimum" value={{annual_minimum}}>
             </p>
@@ -56,12 +59,16 @@
 
           <li>
             <p class="left">
-              <label for="hours_per_day"><span class="tool" data-tip="The number of hours per day that you expect to work (e.g. 8, or 8.5)." tabindex="1">hours per day
+              <label for="hours_per_day"><span class="tool"
+                  data-tip="The number of hours per day that you expect to work (e.g. 8, or 8.5)." tabindex="1">hours
+                  per day
               </label>
               <input type="number" min="1" max="14" step=".01" name="hours_per_day" value={{hours_per_day}}>
             </p>
             <p class="pull-right" style="padding-right: 41px;">
-              <label for="include_today"><span class="tool" data-tip="Check this box if you want to calculate values including hours worked today." tabindex="1">include today's hours
+              <label for="include_today"><span class="tool"
+                  data-tip="Check this box if you want to calculate values including hours worked today."
+                  tabindex="1">include today's hours
               </label>
               <input type="checkbox" name="include_today" value="true" style="width: auto;" {{include_today}}>
             </p>
@@ -72,7 +79,9 @@
           <li>
             <table style="width:100%">
               <tr>
-                <th><span class="tool" data-tip="this amount does not include the additional days off for federal holidays." tabindex="1"></span>days off remaining</th>
+                <th><span class="tool"
+                    data-tip="this amount does not include the additional days off for federal holidays."
+                    tabindex="1"></span>days off remaining</th>
                 <td>{{days_off}}</td>
               </tr>
               <tr>
@@ -80,17 +89,38 @@
                 <td>{{workable_days}}</td>
               </tr>
               <tr>
-                <th><span class="tool" data-tip="'pyh score' is comprised of two numbers, each from -100 to 100. The first is a measure of your rate of using leave, the second is a measure of your rate of earning pyh hours." tabindex="1">pyh score</th>
+                <th><span class="tool"
+                    data-tip="'pyh score' is comprised of two numbers, each from -100 to 100. The first is a measure of your rate of using leave, the second is a measure of your rate of earning pyh hours."
+                    tabindex="1">pyh score</th>
                 <td>{{pyh_score}}</td>
               </tr>
             </table>
           </li>
-
           <li>
             <input class="btn btn-submit" type="submit" value="Calculate">
             <small>or press <strong>enter</strong></small>
           </li>
-
+        </ul>
+        <ul>
+          <li>
+            <div id="option_toggle" class="divider"></div>
+          </li>
+          <div id="options">
+            <li>
+              <p class="left">
+                <label for="unanet_username"><span class="tool" data-tip="enter your unanet username, here."
+                    tabindex="1">unanet username
+                </label>
+                <input type="text" name="unanet_username" value={{unanet_username}}>
+              </p>
+              <p class="pull-right">
+                <label for="unanet_password"><span class="tool" data-tip="unanet password will not be saved"
+                    tabindex="1">unanet password
+                </label>
+                <input type="password" name="unanet_password" value=''>
+              </p>
+            </li>
+          </div>
         </ul>
       </form>
     </div>
