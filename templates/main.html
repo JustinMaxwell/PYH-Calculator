@@ -120,6 +120,15 @@
                 <input type="password" name="unanet_password" value=''>
               </p>
             </li>
+            <li>
+              <p class="debug" hidden>
+                {% for item in debug %}
+                <ul>
+                  <li class="small-text-wrap">{{ item }}</td>
+                </ul>
+                {% endfor %}
+              </p>
+            </li>
           </div>
         </ul>
       </form>

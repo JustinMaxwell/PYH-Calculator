@@ -10,6 +10,12 @@
   white-space: nowrap;
 }
 
+.small-text-wrap {
+  font-weight: 200;
+  font-size: 80%;
+}
+
+
 body {
   background-color: #e6e6e6;
   font-size: 100%;
