@@ -64,14 +64,9 @@ def mainPage():
     if request.method == "POST" and (hours_worked or unanet_password) and annual_minimum and hours_per_day:
         try:
             if unanet_password:
-                try:
-                    unanet_time, debug = get_report(unanet_username, unanet_password)
-                    hours_worked = Decimal(unanet_time)
-                except Exception as e:
-                    debug = e
-                    hours_worked = Decimal(hours_worked)
+                unanet_time = get_report(unanet_username, unanet_password)
+                hours_worked = Decimal(unanet_time)
             else:
-                debug = ''
                 hours_worked = Decimal(hours_worked)
             annual_minimum = Decimal(annual_minimum)
             hours_per_day = Decimal(hours_per_day)
@@ -107,8 +102,7 @@ def mainPage():
                 annual_minimum=annual_minimum,
                 hours_per_day=hours_per_day,
                 include_today=include_today,
-                checked=checked,
-                debug=debug
+                checked=checked
             )
         )
         resp.set_cookie("hours_worked", str(hours_worked))
@@ -119,7 +113,6 @@ def mainPage():
 
 
 def get_report(login, passwd):
-    debug = ['debug:']
     def b64(text):
         return base64.b64encode(text.encode()).decode()
 
@@ -141,7 +134,6 @@ def get_report(login, passwd):
 
     session = requests.Session()
     resp = session.post(login_url, data=data)
-    debug.append('status_code: ' + str(resp.status_code))
 
     # HTML Response to dictionary of results
     soup = BeautifulSoup(resp.text, "html.parser")
@@ -161,14 +153,12 @@ def get_report(login, passwd):
             results[td[0].string] = td[1].string
         else:
             raise Exception("Unexpected results")
-    debug.append(json.dumps(results))
 
     pyh_hours = 0
     for entry in results["data"]:
         if entry["Project"] != "TIME_OFF":
             pyh_hours += float(entry["Hours"])
-    debug.append('pyh_hours: ' + str(pyh_hours))
-    return (pyh_hours, debug)
+    return pyh_hours
 
 
 if __name__ == "__main__":
