@@ -52,7 +52,7 @@ def mainPage():
         workable_days="",
         pyh_score="",
         today=f"{todays_date} ({progress}%)",
-        include_today=None,
+        include_today=include_today,
         annual_minimum=annual_minimum,
         hours_per_day=hours_per_day,
     )
@@ -65,17 +65,20 @@ def mainPage():
                 hours_worked = Decimal(hours_worked)
             annual_minimum = Decimal(annual_minimum)
             hours_per_day = Decimal(hours_per_day)
-            checked = include_today
-            include_today = bool(include_today)
+            include_today_bool = bool(include_today)
+            if include_today:
+                checked = "checked"
+            else:
+                checked = ""
         except:
             return blankPage
         days_off_total = round(((workable_days_total * 8) - annual_minimum) / 8, 2)
         hours_left = annual_minimum - hours_worked
         days_left = hours_left / hours_per_day
         hours_worked_percent = hours_worked / annual_minimum
-        workable_days = workable_days_remaining - Decimal(include_today)
+        workable_days = workable_days_remaining - Decimal(include_today_bool)
         workable_days_percent = workable_days / workable_days_total
-        worked_days = worked_days_todate - Decimal(not include_today)
+        worked_days = worked_days_todate - Decimal(not include_today_bool)
         worked_days_percent = worked_days / workable_days_total
         days_off_remaining = round(workable_days - days_left, 2)
         days_off_remaining_percent = days_off_remaining / days_off_total
@@ -93,7 +96,8 @@ def mainPage():
                 hours_worked=hours_worked,
                 annual_minimum=annual_minimum,
                 hours_per_day=hours_per_day,
-                include_today=checked,
+                include_today=include_today,
+                checked=checked,
             )
         )
         resp.set_cookie("hours_worked", str(hours_worked))
