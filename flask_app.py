@@ -61,7 +61,7 @@ def mainPage():
         annual_minimum=annual_minimum,
         hours_per_day=hours_per_day,
     )
-    if request.method == "POST" and hours_worked and annual_minimum and hours_per_day:
+    if request.method == "POST" and (hours_worked or unanet_password) and annual_minimum and hours_per_day:
         try:
             if unanet_password:
                 try:
